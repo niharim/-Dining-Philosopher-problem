@@ -1,0 +1,46 @@
+ALGORITHM:
+
+	•	Each philosopher is represented by the following pseudocode: 
+	•	process P[i]
+	•	open whileloop the condition is true do
+       4.  THINK;
+       5. PICKUP(CHOPSTICK[i], CHOPSTICK[i+1 mod 5])
+       6. EAT
+       7. PUTDOWN(CHOPSTICK[i], CHOPSTICK[i+1 mod 5])
+       8. There are three states of the philosopher: THINKING, HUNGRY, and EATING. 
+       9. There are two semaphores: Mutex and a semaphore array for the philosophers. 
+      10. Mutex is used such that no two philosophers may access the pickup or putdown at the same time. 
+      11. The array is used to control the behavior of each philosopher. 
+      12. semaphores can result in deadlock due to programming errors.
+
+
+
+PROGRAM:
+
+
+#include<stdio.h>
+void cp(FILE* fptr1, FILE* fptr2) 
+{
+    char ch;
+    while((ch=fgetc(fptr1))!=EOF)
+    {
+        fputc(ch,fptr2);
+    }
+    fclose(fptr1);
+    fclose(fptr2);
+}
+int main(int argc, char* argv[])
+{
+    FILE *fptr1, *fptr2;
+    fptr1 = fopen(argv[1], "r");
+    fptr2 = fopen(argv[2],"w");
+    if(!fptr1 || !fptr2 || argc!=3) 
+    {
+        printf("Error\n");
+        return 0;
+
+    }
+    cp(fptr1, fptr2);
+    return 0;
+}
+
